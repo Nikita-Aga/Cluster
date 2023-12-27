@@ -18,6 +18,6 @@ app = Flask(__name__)
 def ping():
     return 'Pong!'
 
-app.run()
+app.run(port=3333)
 
 
