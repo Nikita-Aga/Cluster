@@ -9,7 +9,15 @@ def cloud_flared():
 
 th = threading.Thread(target=cloud_flared)
 th.start()
-time.sleep(10)
+time.sleep(5)
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/ping')
+def ping():
+    return 'Pong!'
+
+app.run()
 
 
-print(111)
