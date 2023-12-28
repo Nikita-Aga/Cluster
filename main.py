@@ -10,7 +10,9 @@ def cloud_flared():
   cmd = "cloudflared tunnel --url http://localhost:3333 --no-autoupdate"
   with Popen(cmd,
              stdout=PIPE, universal_newlines=True,shell=True) as process:
+      print(1)
       for line in process.stdout:
+        print(11,line)
         pass
           # print(line)
 
