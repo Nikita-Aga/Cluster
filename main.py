@@ -11,7 +11,8 @@ def cloud_flared():
   with Popen(cmd,
              stdout=PIPE, universal_newlines=True,shell=True) as process:
       for line in process.stdout:
-          print(line)
+        pass
+          # print(line)
 
 th = threading.Thread(target=cloud_flared)
 th.start()
