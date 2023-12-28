@@ -7,11 +7,11 @@ import time
 from subprocess import Popen, PIPE
 def cloud_flared():
   run = True
-  with Popen([sys.executable, '-u', 'child.py'],
+  cmd = "cloudflared tunnel --url http://localhost:3333 --no-autoupdate"
+  with Popen([cmd,
              stdout=PIPE, universal_newlines=True) as process:
       for line in process.stdout:
-          print(line.replace('!', '#'), end='')
-  os.system("cloudflared tunnel --url http://localhost:3333 --no-autoupdate")
+          print(line)
 
 th = threading.Thread(target=cloud_flared)
 th.start()
