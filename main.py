@@ -7,9 +7,9 @@ import time
 from subprocess import Popen, PIPE
 def cloud_flared():
   run = True
-  cmd = "/bin/zsh cloudflared tunnel --url http://localhost:3333 --no-autoupdate"
+  cmd = "cloudflared tunnel --url http://localhost:3333 --no-autoupdate"
   with Popen(cmd,
-             stdout=PIPE, universal_newlines=True) as process:
+             stdout=PIPE, universal_newlines=True,shell=True) as process:
       for line in process.stdout:
           print(line)
 
