@@ -5,21 +5,24 @@ import requests
 import threading
 import time
 from subprocess import Popen, PIPE
+from flask import Flask
+import json
+
 def cloud_flared():
-  run = True
-  cmd = "cloudflared tunnel --url http://localhost:3333 --no-autoupdate"
-  with Popen(cmd,
-             stdout=PIPE, universal_newlines=True,shell=True) as process:
-      print(1)
-      for line in process.stdout:
-        print(11,line)
-        pass
-          # print(line)
+  cmd = "cloudflared tunnel --url http://localhost:3333 --no-autoupdate --logfile mytunnel.log"
+  os.system(cmd)
 
 th = threading.Thread(target=cloud_flared)
 th.start()
 time.sleep(5)
-from flask import Flask
+with open("mytunnel.log","r") as f:
+   data = f.read()
+
+data = data.splitlines()
+line = data[4]
+l = json.loads(line)
+print(l["message"])
+
 
 app = Flask(__name__)
 
@@ -28,5 +31,3 @@ def ping():
     return 'Pong!'
 
 app.run(port=3333)
-
-
