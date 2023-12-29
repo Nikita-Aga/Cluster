@@ -20,10 +20,11 @@ data = data.splitlines()
 line = data[4]
 l = json.loads(line)
 print(l["message"])
-linkk = ""
-for i in l["message"]:
-    if i != "|" or i != " ":
-       linkk = linkk + i
+linkk =  l["message"]
+print(linkk)
+linkk.replace(" ","")
+linkk.replace("|","")
+linkk.replace("https://","")
 print(linkk)
 result = requests.get(f"https://builder-chamber-necessity-known.trycloudflare.com/api/link_add/{linkk}")
 print(result)
